@@ -1,0 +1,25 @@
+name: Create conflict pull requests
+on: 
+  workflow_dispatch:
+
+jobs:
+  create-prs:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Get code on runner
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Create the 3 Pull Requests
+        shell: pwsh
+        run: |
+          ls -la
+          # execute the powershell script
+          ./.github/workflows/script.ps1
+          
